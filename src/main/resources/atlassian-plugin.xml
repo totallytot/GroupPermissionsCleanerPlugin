@@ -1,0 +1,48 @@
+<atlassian-plugin key="${atlassian.plugin.key}" name="${project.name}" plugins-version="2">
+    <plugin-info>
+        <description>${project.description}</description>
+        <version>${project.version}</version>
+        <vendor name="${project.organization.name}" url="${project.organization.url}" />
+        <param name="plugin-icon">images/pluginIcon.png</param>
+        <param name="plugin-logo">images/pluginLogo.png</param>
+    </plugin-info>
+
+    <!-- add our i18n resource -->
+    <resource type="i18n" name="i18n" location="GroupPermissionsCleanerPlugin"/>
+    
+    <!-- add our web resources -->
+    <web-resource key="GroupPermissionsCleanerPlugin-resources" name="GroupPermissionsCleanerPlugin Web Resources">
+        <dependency>com.atlassian.auiplugin:ajs</dependency>
+        
+        <resource type="download" name="GroupPermissionsCleanerPlugin.css" location="/css/GroupPermissionsCleanerPlugin.css"/>
+        <resource type="download" name="GroupPermissionsCleanerPlugin.js" location="/js/GroupPermissionsCleanerPlugin.js"/>
+        <resource type="download" name="images/" location="/images"/>
+
+        <context>GroupPermissionsCleanerPlugin</context>
+    </web-resource>
+
+    <servlet name="Admin Servlet" i18n-name-key="admin-servlet.name" key="admin-servlet" class="com.epmbdas.servlet.AdminServlet">
+        <description key="admin-servlet.description">Plugin Admin Servlet</description>
+        <url-pattern>/cleaner</url-pattern>
+    </servlet>
+
+    <web-item name="AdminWebItem" i18n-name-key="admin-web-item.name" key="admin-web-item" section="system.admin/configuration" weight="40">
+        <description key="admin-web-item.description">Link for Admin Servlet</description>
+        <label key="Group Permissions Cleaner"></label>
+        <link linkId="admin-web-item-link">/plugins/servlet/cleaner</link>
+    </web-item>
+
+    <job-config name="Clean Permissions for Groups" key="cleanJobConfig">
+        <job key="cleanJob" perClusterJob="true"/>
+        <schedule cron-expression="0 0 0 * * ?" jitterSecs="10"/>
+        <managed editable="true" keepingHistory="true" canRunAdhoc="true" canDisable="true"/>
+    </job-config>
+
+    <ao key="ao-module">
+        <description>The module configuring the Active Objects service used by this plugin</description>
+        <entity>com.epmbdas.ao.PublicSpaces</entity>
+        <entity>com.epmbdas.ao.AffectedGroups</entity>
+        <entity>com.epmbdas.ao.Emails</entity>
+    </ao>
+
+</atlassian-plugin>

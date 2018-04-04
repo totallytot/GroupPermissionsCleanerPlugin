@@ -1,0 +1,68 @@
+<html>
+  <head>
+    <title>Group Permissions Cleaner</title>
+    <meta name="decorator" content="atl.admin">
+    <style>
+    .info {
+        border-left: 4px solid #2196F3;
+    }
+    </style>
+ </head>
+  <body>
+    <form id="admin" class="aui" action="" method="POST">
+        <div class="field-group">
+             <label for="name">Add Public Space Key:</label>
+             <input type="text" id="spacekey" name="spacekey" class="text">
+        </div>
+        <div class="field-group">
+              <label for="name">Remove Public Space Key:</label>
+              <input type="text" id="rspacekey" name="rspacekey" class="text">
+        </div>
+         <div class="field-group">
+                     <label for="name">Add Group For Cleaning:</label>
+                     <input type="text" id="group" name="group" class="text">
+        </div>
+        <div class="field-group">
+                      <label for="name">Remove Group From Cleaning:</label>
+                      <input type="text" id="rgroup" name="rgroup" class="text">
+        </div>
+        <div class="field-group">
+                      <label for="name">Add Notification Receiver (email):</label>
+                      <input type="text" id="notification" name="notification" class="text">
+        </div>
+        <div class="field-group">
+                      <label for="name">Remove Notification Receiver (email):</label>
+                      <input type="text" id="rnotification" name="rnotification" class="text">
+        </div>
+        <div class="field-group">
+            <input type="submit" value="Save" class="button">
+        </div>
+           <p> </p>
+        <div class="info">
+          <p>&thinsp;The cleaner works if there are at least one public space and one group for removal.</p>
+        </div>
+        <div class="info">
+          <p>&thinsp;Visit Administration - Scheduled Jobs in order to set time interval for cleaning. Default schedule: each day at 00:00:00. Job: Group Permissions Cleaner.</p>
+        </div>
+        <p> </p>
+        <div class="view">
+            <label for="name">Public Space Keys:</label>
+            <div class="field-value">
+            $!publicSpaces
+            </div>
+         </div>
+         <div class="view">
+            <label for="name">Groups For Cleaning Permissions:</label>
+            <div class="field-value">
+            $!affectedGroups
+            </div>
+         </div>
+         <div class="view">
+            <label for="name">Notification Receivers:</label>
+            <div class="field-value">
+             $!notificationReceivers
+         </div>
+        </div>
+    </form>
+  </body>
+</html>
